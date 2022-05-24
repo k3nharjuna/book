@@ -11,16 +11,18 @@ var _mongodb = _interopRequireDefault(require("./mongodb"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var wishlistsSchema = new _mongodb.default.Schema({
-  books: {
-    type: Array
+var guestsSchema = new _mongodb.default.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true
   }
 }, {
   timestamps: true,
-  collections: "wishlists"
+  collections: "guests"
 });
 
-var Wishlists = _mongodb.default.model("wishlists", wishlistsSchema);
+var Guests = _mongodb.default.model("guests", guestsSchema);
 
-var _default = Wishlists;
+var _default = Guests;
 exports.default = _default;

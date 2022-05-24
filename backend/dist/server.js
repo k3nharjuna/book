@@ -13,19 +13,21 @@ var _express = _interopRequireDefault(require("express"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
+var _errorHandler = _interopRequireDefault(require("./middlewares/errorHandler"));
+
 var _index = _interopRequireDefault(require("./routes/index.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import errorHandler from "./middlewares/errorHandler";
 var app = (0, _express.default)();
-var PORT = 3000 || process.env.PORT;
+var PORT = 5000 || process.env.PORT;
 app.use((0, _cors.default)());
 app.use(_express.default.urlencoded({
   extended: false
 }));
 app.use(_express.default.json());
-app.use("/api", _index.default); // app.use(errorHandler);
+app.use("/api", _index.default);
+app.use(_errorHandler.default);
 
 var _default = function _default() {
   app.listen(PORT, function () {

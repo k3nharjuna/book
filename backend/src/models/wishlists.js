@@ -2,7 +2,7 @@ import mongoose from "./mongodb";
 
 const wishlistsSchema = new mongoose.Schema(
   {
-    bookId: { type: String, unique: true, required: true },
+    books: { type: Array },
   },
   { timestamps: true, collections: "wishlists" }
 );
