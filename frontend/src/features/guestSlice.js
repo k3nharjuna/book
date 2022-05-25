@@ -5,6 +5,7 @@ export const guestSlice = createSlice({
   initialState: {
     guestName: null, //string
     books: [],
+    wishlists: [],
   },
   reducers: {
     guestLogin: (state, action) => {
@@ -13,9 +14,12 @@ export const guestSlice = createSlice({
     fetchBooks: (state, action) => {
       state.books = action.payload;
     },
+    fetchWishlists: (state, action) => {
+      state.wishlists = action.payload;
+    },
   },
 });
 
-export const { guestLogin, fetchBooks } = guestSlice.actions;
+export const { guestLogin, fetchBooks, fetchWishlists } = guestSlice.actions;
 
 export default guestSlice.reducer;

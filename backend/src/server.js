@@ -5,7 +5,7 @@ import errorHandler from "./middlewares/errorHandler";
 import router from "./routes/index.js";
 
 const app = express();
-const PORT = 5000 || process.env.PORT;
+const PORT = 8000 || process.env.PORT;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

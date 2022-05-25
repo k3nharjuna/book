@@ -2,15 +2,33 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchBooks } from "../features/guestSlice";
 import { useState } from "react";
 import axios from "axios";
+import { matchRoutes, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const name = useSelector((state) => state.guest.guestName);
   const books = useSelector((state) => state.guest.books);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
+  const location = useLocation();
+  
   function handleInputChange(e) {
     setSearch(e.target.value);
+  }
+
+  let goToPage = ""
+
+  if(location.pathname === "/home") {
+    goToPage = "/wishlists"
+  } else if (location.pathname === "/wishlists") {
+    goToPage = "/home"
+  }
+  
+  console.log(location.path)
+  function goTo() {
+    navigate(goToPage, { replace: true });
   }
 
   function findBooks() {
@@ -26,9 +44,9 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 border border-t-slate-400">
         <div className="flex-1">
-          <div className="btn btn-ghost normal-case text-xl">My Wishlists </div>
+          <div className="btn btn-ghost normal-case text-xl" onClick={goTo}>{goToPage.slice(1, goToPage.length - 1)}</div>
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">

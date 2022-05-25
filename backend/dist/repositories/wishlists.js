@@ -28,6 +28,8 @@ require("core-js/modules/es.object.get-prototype-of.js");
 
 require("core-js/modules/web.dom-collections.for-each.js");
 
+require("core-js/modules/es.function.name.js");
+
 require("core-js/modules/es.object.set-prototype-of.js");
 
 require("core-js/modules/es.array.slice.js");
@@ -35,15 +37,11 @@ require("core-js/modules/es.array.slice.js");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
-
-require("core-js/modules/es.function.name.js");
+exports.getWishlists = exports.addWishlist = void 0;
 
 require("core-js/modules/es.object.to-string.js");
 
 require("core-js/modules/es.promise.js");
-
-var _guest = _interopRequireDefault(require("../models/guest"));
 
 var _wishlists = _interopRequireDefault(require("../models/wishlists"));
 
@@ -55,58 +53,124 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var login = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(guestName) {
-    var isUserExists, newGuest;
+var addWishlist = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(data) {
+    var wishlists, newUserWishlists, update;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _guest.default.findOne({
-              name: guestName
+            return _wishlists.default.findOneAndUpdate({
+              guestName: data.guestName
+            }, {
+              $push: {
+                books: data.bookId
+              }
             });
 
           case 3:
-            isUserExists = _context.sent;
+            wishlists = _context.sent;
 
-            if (!(!isUserExists || !isUserExists.name || isUserExists === null)) {
-              _context.next = 9;
+            if (!(wishlists === null || !wishlists)) {
+              _context.next = 13;
               break;
             }
 
             _context.next = 7;
-            return _guest.default.create({
-              name: guestName
+            return _wishlists.default.create({
+              guestName: data.guestName,
+              books: []
             });
 
           case 7:
-            newGuest = _context.sent;
-            return _context.abrupt("return", newGuest);
-
-          case 9:
-            return _context.abrupt("return", guestName);
-
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](0);
-            return _context.abrupt("return", {
-              name: "InternalError"
+            newUserWishlists = _context.sent;
+            _context.next = 10;
+            return _wishlists.default.findOneAndUpdate({
+              guestName: data.guestName
+            }, {
+              $push: {
+                books: data.bookId
+              }
+            }, {
+              new: true
             });
 
-          case 15:
+          case 10:
+            update = _context.sent;
+            console.log(update);
+            return _context.abrupt("return", update);
+
+          case 13:
+            return _context.abrupt("return", wishlists);
+
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](0);
+            return _context.abrupt("return", _context.t0);
+
+          case 19:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 12]]);
+    }, _callee, null, [[0, 16]]);
   }));
 
-  return function login(_x) {
+  return function addWishlist(_x) {
     return _ref.apply(this, arguments);
   };
 }();
 
-var _default = login;
-exports.default = _default;
+exports.addWishlist = addWishlist;
+
+var getWishlists = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(guestName) {
+    var wishlists;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return _wishlists.default.findOne({
+              guestName: guestName
+            });
+
+          case 3:
+            wishlists = _context2.sent;
+
+            if (!(wishlists && wishlists.books)) {
+              _context2.next = 8;
+              break;
+            }
+
+            return _context2.abrupt("return", wishlists.books);
+
+          case 8:
+            return _context2.abrupt("return", []);
+
+          case 9:
+            _context2.next = 14;
+            break;
+
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](0);
+            return _context2.abrupt("return", _context2.t0);
+
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 11]]);
+  }));
+
+  return function getWishlists(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.getWishlists = getWishlists;

@@ -20,7 +20,7 @@ var _index = _interopRequireDefault(require("./routes/index.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express.default)();
-var PORT = 5000 || process.env.PORT;
+var PORT = 8000 || process.env.PORT;
 app.use((0, _cors.default)());
 app.use(_express.default.urlencoded({
   extended: false
