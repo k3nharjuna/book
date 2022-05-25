@@ -68,37 +68,38 @@ var login = /*#__PURE__*/function () {
 
           case 3:
             isUserExists = _context.sent;
+            console.log(isUserExists);
 
             if (!(!isUserExists || !isUserExists.name || isUserExists === null)) {
-              _context.next = 9;
+              _context.next = 10;
               break;
             }
 
-            _context.next = 7;
+            _context.next = 8;
             return _guest.default.create({
               name: guestName
             });
 
-          case 7:
+          case 8:
             newGuest = _context.sent;
             return _context.abrupt("return", newGuest);
 
-          case 9:
+          case 10:
             return _context.abrupt("return", guestName);
 
-          case 12:
-            _context.prev = 12;
+          case 13:
+            _context.prev = 13;
             _context.t0 = _context["catch"](0);
             return _context.abrupt("return", {
               name: "InternalError"
             });
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 12]]);
+    }, _callee, null, [[0, 13]]);
   }));
 
   return function login(_x) {

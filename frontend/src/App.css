@@ -1,16 +1,13 @@
 .home {
   /* background-image: url("./assets/books.jpg"); */
-  background: linear-gradient(rgba(0, 74, 177, 0.3), rgba(5, 161, 189, 0.6)), url("./assets/books.jpg");
+  background: linear-gradient(rgba(0, 74, 177, 0.3), rgba(5, 161, 189, 0.6)),
+    url("./assets/books.jpg");
   background-size: cover;
 }
 
 .guestForm {
   width: 1000px;
-  height: 750px
-}
-
-.form-container {
-  /* height: 80%; */
+  height: 750px;
 }
 
 .fa-solid {
