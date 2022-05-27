@@ -70,7 +70,8 @@ var addWishlist = /*#__PURE__*/function () {
                   title: data.title,
                   authors: data.authors,
                   thumbnail: data.thumbnail,
-                  id: data.bookId
+                  id: data.bookId,
+                  averageRating: data.averageRating
                 }
               }
             });

@@ -53,21 +53,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var guestWish = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res, next) {
-    var _req$body, bookId, guestName, title, authors, thumbnail, wishlist;
+    var _req$body, bookId, guestName, title, authors, thumbnail, averageRating, wishlist;
 
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _req$body = req.body, bookId = _req$body.bookId, guestName = _req$body.guestName, title = _req$body.title, authors = _req$body.authors, thumbnail = _req$body.thumbnail;
+            _req$body = req.body, bookId = _req$body.bookId, guestName = _req$body.guestName, title = _req$body.title, authors = _req$body.authors, thumbnail = _req$body.thumbnail, averageRating = _req$body.averageRating;
             _context.next = 4;
             return (0, _wishlists.addWishlist)({
               bookId: bookId,
               guestName: guestName,
               title: title,
               authors: authors,
-              thumbnail: thumbnail
+              thumbnail: thumbnail,
+              averageRating: averageRating
             });
 
           case 4:
@@ -116,30 +117,29 @@ var getGuestWishlists = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log(req.params);
-            _context2.prev = 1;
-            _context2.next = 4;
+            _context2.prev = 0;
+            _context2.next = 3;
             return (0, _wishlists.getWishlists)(req.params.guestname);
 
-          case 4:
+          case 3:
             wishlists = _context2.sent;
             res.status(200).json({
               data: wishlists
             });
-            _context2.next = 11;
+            _context2.next = 10;
             break;
 
-          case 8:
-            _context2.prev = 8;
-            _context2.t0 = _context2["catch"](1);
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
             next(_context2.t0);
 
-          case 11:
+          case 10:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[1, 8]]);
+    }, _callee2, null, [[0, 7]]);
   }));
 
   return function getGuestWishlists(_x4, _x5, _x6) {

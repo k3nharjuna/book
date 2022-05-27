@@ -11,6 +11,7 @@ const addWishlist = async (data) => {
             authors: data.authors,
             thumbnail: data.thumbnail,
             id: data.bookId,
+            averageRating: data.averageRating,
           },
         },
       }
