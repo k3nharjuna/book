@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGO_URI2, {
   // authSource: "admin",
   // user: process.env.MONGO_USERNAME,
   // pass: process.env.MONGO_PASSWORD,
