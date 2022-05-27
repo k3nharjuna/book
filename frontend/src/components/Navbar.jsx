@@ -53,7 +53,9 @@ export default function Navbar() {
               goToPage.slice(2, goToPage.length)}
           </div>
         </div>
-        <div className="flex-none gap-2">
+        {
+          location.pathname !== "/home" ? <></>
+          : <div className="flex-none gap-2">
           <div className="form-control">
             <form >
               <input
@@ -70,19 +72,9 @@ export default function Navbar() {
                 <i className="fa-solid fa-magnifying-glass mt-3"></i>
               </div>
             </label>
-            {/* <ul
-              tabIndex="0"
-              className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a href="#">{name}</a>
-              </li>
-              <li>
-                <a href="">Logout</a>
-              </li>
-            </ul> */}
           </div>
         </div>
+        }
       </div>
     </>
   );
