@@ -26,7 +26,6 @@ export default function Navbar() {
     goToPage = "/home";
   }
 
-  console.log(location.path);
   function goTo() {
     navigate(goToPage, { replace: true });
   }
@@ -56,12 +55,14 @@ export default function Navbar() {
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
-            <input
+            <form >
+              <input
               type="text"
               placeholder="Search"
               className="input input-bordered"
               onChange={(e) => handleInputChange(e)}
             />
+            </form>
           </div>
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">

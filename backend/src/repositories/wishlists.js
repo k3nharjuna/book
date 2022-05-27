@@ -4,7 +4,16 @@ const addWishlist = async (data) => {
   try {
     const wishlists = await Wishlists.findOneAndUpdate(
       { guestName: data.guestName },
-      { $push: { books: data.bookId } }
+      {
+        $push: {
+          books: {
+            title: data.title,
+            authors: data.authors,
+            thumbnail: data.thumbnail,
+            id: data.bookId,
+          },
+        },
+      }
     );
     if (wishlists === null || !wishlists) {
       const newUserWishlists = await Wishlists.create({
@@ -13,12 +22,21 @@ const addWishlist = async (data) => {
       });
       const update = await Wishlists.findOneAndUpdate(
         { guestName: data.guestName },
-        { $push: { books: data.bookId } },
+        // { $push: { books: data.bookId } },
+        {
+          $push: {
+            books: {
+              title: data.title,
+              authors: data.authors,
+              thumbnail: data.thumbnail,
+              id: data.bookId,
+            },
+          },
+        },
         {
           new: true,
         }
       );
-      console.log(update);
       return update;
     }
     return wishlists;

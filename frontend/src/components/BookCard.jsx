@@ -7,6 +7,7 @@ import { fetchWishlists } from "../features/guestSlice";
 import LoveIcon from "./LoveIcon.jsx";
 
 export default function BookCard(props) {
+  console.log(props)
   const guestName = useSelector((state) => state.guest.guestName);
   const wishlists = useSelector((state) => state.guest.wishlists);
   const dispatch = useDispatch();
@@ -29,18 +30,33 @@ export default function BookCard(props) {
   const addWishlist = () => {
     fetchWishlistsDb();
     let isBookExists = false;
-    wishlists.forEach((bookId) => {
-      if (bookId === props.data.id) {
+    wishlists.forEach((book) => {
+      if (book.id === props.data.id) {
         isBookExists = true;
       }
     });
     if (isBookExists) {
       Swal.fire("Book Already in your wishlists!");
     } else {
+
+      let title = props.data.volumeInfo.title
+      console.log(title)
+      let authors = "Unknown"
+      let thumbnail = ""
+      if(props.data.volumeInfo.imageLinks && props.data.volumeInfo.imageLinks.thumbnail) {
+        thumbnail = props.data.volumeInfo.imageLinks.thumbnail
+      }
+      if(props.data.volumeInfo.authors) {
+        authors = props.data.volumeInfo.authors
+      }
+
       axios
         .post("http://localhost:8000/api/books/wishlists", {
           bookId: props.data.id,
           guestName,
+          title,
+          authors,
+          thumbnail
         })
         .then((data) => {
           fetchWishlistsDb();

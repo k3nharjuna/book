@@ -53,18 +53,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var guestWish = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res, next) {
-    var _req$body, bookId, guestName, wishlist;
+    var _req$body, bookId, guestName, title, authors, thumbnail, wishlist;
 
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _req$body = req.body, bookId = _req$body.bookId, guestName = _req$body.guestName;
+            _req$body = req.body, bookId = _req$body.bookId, guestName = _req$body.guestName, title = _req$body.title, authors = _req$body.authors, thumbnail = _req$body.thumbnail;
             _context.next = 4;
             return (0, _wishlists.addWishlist)({
               bookId: bookId,
-              guestName: guestName
+              guestName: guestName,
+              title: title,
+              authors: authors,
+              thumbnail: thumbnail
             });
 
           case 4:

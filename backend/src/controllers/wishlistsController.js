@@ -2,8 +2,14 @@ import { addWishlist, getWishlists } from "../repositories/wishlists";
 
 const guestWish = async (req, res, next) => {
   try {
-    const { bookId, guestName } = req.body;
-    const wishlist = await addWishlist({ bookId, guestName });
+    const { bookId, guestName, title, authors, thumbnail } = req.body;
+    const wishlist = await addWishlist({
+      bookId,
+      guestName,
+      title,
+      authors,
+      thumbnail,
+    });
     if (!wishlist) throw { name: "InternalError" };
     res.status(201).json({ msg: "Update success" });
   } catch (err) {

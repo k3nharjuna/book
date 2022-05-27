@@ -66,7 +66,12 @@ var addWishlist = /*#__PURE__*/function () {
               guestName: data.guestName
             }, {
               $push: {
-                books: data.bookId
+                books: {
+                  title: data.title,
+                  authors: data.authors,
+                  thumbnail: data.thumbnail,
+                  id: data.bookId
+                }
               }
             });
 
@@ -74,7 +79,7 @@ var addWishlist = /*#__PURE__*/function () {
             wishlists = _context.sent;
 
             if (!(wishlists === null || !wishlists)) {
-              _context.next = 13;
+              _context.next = 12;
               break;
             }
 
@@ -89,9 +94,15 @@ var addWishlist = /*#__PURE__*/function () {
             _context.next = 10;
             return _wishlists.default.findOneAndUpdate({
               guestName: data.guestName
-            }, {
+            }, // { $push: { books: data.bookId } },
+            {
               $push: {
-                books: data.bookId
+                books: {
+                  title: data.title,
+                  authors: data.authors,
+                  thumbnail: data.thumbnail,
+                  id: data.bookId
+                }
               }
             }, {
               new: true
@@ -99,23 +110,22 @@ var addWishlist = /*#__PURE__*/function () {
 
           case 10:
             update = _context.sent;
-            console.log(update);
             return _context.abrupt("return", update);
 
-          case 13:
+          case 12:
             return _context.abrupt("return", wishlists);
 
-          case 16:
-            _context.prev = 16;
+          case 15:
+            _context.prev = 15;
             _context.t0 = _context["catch"](0);
             return _context.abrupt("return", _context.t0);
 
-          case 19:
+          case 18:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 16]]);
+    }, _callee, null, [[0, 15]]);
   }));
 
   return function addWishlist(_x) {
