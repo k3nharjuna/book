@@ -5,15 +5,17 @@ import noImage from "../assets/no-picture.jpg";
 import Swal from "sweetalert2";
 import { fetchWishlists } from "../features/guestSlice";
 import LoveIcon from "./LoveIcon.jsx";
+import ReactStars from "react-rating-stars-component";
+
 
 export default function BookCard(props) {
-  console.log(props)
   const guestName = useSelector((state) => state.guest.guestName);
   const wishlists = useSelector((state) => state.guest.wishlists);
   const dispatch = useDispatch();
+  const [star, setStar] = useState(props.data.volumeInfo.averageRating? +props.data.volumeInfo.averageRating : 0)
 
   useEffect(() => {
-    // fetchWishlistsDb()
+    fetchWishlistsDb()
   }, []);
 
   const fetchWishlistsDb = () => {
@@ -40,15 +42,18 @@ export default function BookCard(props) {
     } else {
 
       let title = props.data.volumeInfo.title
-      console.log(title)
       let authors = "Unknown"
       let thumbnail = ""
+      // let averageRating = 0
       if(props.data.volumeInfo.imageLinks && props.data.volumeInfo.imageLinks.thumbnail) {
         thumbnail = props.data.volumeInfo.imageLinks.thumbnail
       }
       if(props.data.volumeInfo.authors) {
         authors = props.data.volumeInfo.authors
       }
+      // if(props.data.volumeInfo.averageRating) {
+      //   averageRating = props.data.volumeInfo.averageRating
+      // }
 
       axios
         .post("http://localhost:8000/api/books/wishlists", {
@@ -56,7 +61,8 @@ export default function BookCard(props) {
           guestName,
           title,
           authors,
-          thumbnail
+          thumbnail,
+          averageRating: star
         })
         .then((data) => {
           fetchWishlistsDb();
@@ -94,6 +100,15 @@ export default function BookCard(props) {
             alt="cover"
           />
         </figure>
+        <div className="mx-auto my-1 flex justify-center items-center">
+          <ReactStars
+            count={5}
+            // onChange={ratingChanged}
+            value={star}
+            size={24}
+            activeColor="#ffd700"
+          />
+        </div>
         <div className="card-body">
           <h2 className="text-xl text-zinc-500">
             {props.data.volumeInfo.title}
