@@ -1,5 +1,6 @@
-import axios from "axios";
-import { useDispatch } from "react-redux";
+// import axios from "axios";
+import axios from "../api/axios";
+import { useDispatch, useSelector } from "react-redux";
 import { guestLogin } from "../features/guestSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +11,7 @@ export default function GuestForm() {
   const login = async (e) => {
     e.preventDefault();
     axios({
-      url: "http://localhost:8000/api/auth/login",
+      url: "/auth/login",
       method: "POST",
       data: {
         guestName: e.target[0].value,

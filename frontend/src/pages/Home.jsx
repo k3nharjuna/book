@@ -2,10 +2,10 @@ import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import BookCard from "../components/BookCard";
 import { useEffect } from "react";
-import axios from "axios";
 import { fetchWishlists } from "../features/guestSlice";
 import { useNavigate } from "react-router-dom";
 import { Route, useParams } from "react-router-dom";
+import axios from "../api/axios";
 
 export default function Home() {
   const books = useSelector((state) => state.guest.books);
@@ -27,7 +27,7 @@ export default function Home() {
 
   const fetchWishlistsDb = () => {
     axios
-      .get(`http://localhost:8000/api/books/wishlists/${guestName}`)
+      .get(`/books/wishlists/${guestName}`)
       .then((data) => {
         dispatch(fetchWishlists(data.data.data));
       })
