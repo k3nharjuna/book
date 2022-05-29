@@ -9,7 +9,6 @@ export default function GuestForm() {
 
   const login = async (e) => {
     e.preventDefault();
-    console.log(e.target[0].value);
     axios({
       url: "http://localhost:8000/api/auth/login",
       method: "POST",
@@ -32,7 +31,9 @@ export default function GuestForm() {
         <i class="fa-solid fa-book-open-reader mx-1"></i>Libraree
       </div>
       <div className="form-container w-1/2 h-3/4 flex flex-col justify-center items-center mx-auto">
-        <div className="w-25 my-3 text-stone-700 font-bold text-3xl">Online Library</div>
+        <div className="w-25 my-3 text-stone-700 font-bold text-3xl">
+          Online Library
+        </div>
         <div className="w-4/5 my-2 text-center text-stone-700 text-xl">
           Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
           consectetur, adipisci velit...
@@ -48,7 +49,10 @@ export default function GuestForm() {
             class="input input-bordered input-info w-full max-w-xs my-3 text-stone-600"
             required
           />
-          <button className="btn btn-outline btn-info mx-auto w-full" type="submit">
+          <button
+            className="btn btn-outline btn-info mx-auto w-full"
+            type="submit"
+          >
             Sign me in!
           </button>
         </form>

@@ -41,6 +41,18 @@ export default function Navbar() {
       });
   }
 
+  function onEnterSearch(e) {
+    e.preventDefault();
+    axios
+      .get(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
+      .then((data) => {
+        dispatch(fetchBooks(data.data.items));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <>
       <div className="navbar bg-base-100 border border-t-slate-400">
@@ -53,28 +65,30 @@ export default function Navbar() {
               goToPage.slice(2, goToPage.length)}
           </div>
         </div>
-        {
-          location.pathname !== "/home" ? <></>
-          : <div className="flex-none gap-2">
-          <div className="form-control">
-            <form >
-              <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered"
-              onChange={(e) => handleInputChange(e)}
-            />
-            </form>
+        {location.pathname !== "/home" ? (
+          <></>
+        ) : (
+          <div className="flex-none gap-2">
+            <div className="form-control">
+              <form onSubmit={(e) => onEnterSearch(e)}>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="input input-bordered"
+                  onChange={(e) => handleInputChange(e)}
+                  autoFocus
+                />
+              </form>
+            </div>
+            <div className="dropdown dropdown-end">
+              <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full" onClick={findBooks}>
+                  <i className="fa-solid fa-magnifying-glass mt-3"></i>
+                </div>
+              </label>
+            </div>
           </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full" onClick={findBooks}>
-                <i className="fa-solid fa-magnifying-glass mt-3"></i>
-              </div>
-            </label>
-          </div>
-        </div>
-        }
+        )}
       </div>
     </>
   );
